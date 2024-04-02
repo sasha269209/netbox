@@ -64,7 +64,8 @@ sudo apt install
 - zlib1g-dev. ок
 
 
-Type y to proceed with the installation of dependencies such as Apache2 web server, PostgreSQL database server, Redis, Git, Python3 packages, and some additional system libraries.
+Type y to proceed with the installation of dependencies such as Apache2 web server, PostgreSQL database server, 
+Redis, Git, Python3 packages, and some additional system libraries.
 
 - - install dependencies
 
@@ -104,7 +105,8 @@ The Redis service should be running and enabled like the following
 - - Advertisement
 - - Ezoic
 
-Lastly, verify the Python version using the command below. The latest version of NetBox IRM supports Python v3.9, 3.10, and 3.11.
+Lastly, verify the Python version using the command below. The latest version of NetBox IRM supports 
+Python v3.9, 3.10, and 3.11.
 
 ***
 python3 --version
@@ -115,15 +117,17 @@ You should see Python 3.11 is installed on your Debian machine.
 
 Configuring PostgreSQL Server
 
-After installing dependencies, you will create a new PostgreSQL database and user that NetBox will use. To do that, you must log in to the PostgreSQL server via psql command line.
+After installing dependencies, you will create a new PostgreSQL database and user that NetBox will use. 
+To do that, you must log in to the PostgreSQL server via psql command line.
 
 Log in to the PostgreSQL server by executing the command below.
 
 ***
-sudo -u postgres psql. ок
+sudo -u postgres psql ок
 
 Саша Київстар, [02.04.2024 19:25]
-Run the following queries to create a new user netbox with password p4ssw0rd. Then, create a new database netboxdb with the owner netbox.
+Run the following queries to create a new user netbox with password p4ssw0rd. 
+Then, create a new database netboxdb with the owner netbox.
 
 ***
 CREATE USER netbox LOGIN CREATEDB PASSWORD 'p4ssw0rd';
@@ -142,7 +146,8 @@ You should see the database netboxdb and user netbox created on your PostgreSQL 
 
 Type quit to exit from the PostgreSQL server.
 
-Next, log in to PostgreSQL using the new user netbox to the database netboxdb. This will ensure that the user netbox can connect to the database netboxdb.
+Next, log in to PostgreSQL using the new user netbox to the database netboxdb. 
+This will ensure that the user netbox can connect to the database netboxdb.
 
 ***
 sudo -u postgres psql --username netbox --password --host localhost netboxdb
@@ -160,7 +165,10 @@ Type quit again to exit from your PostgreSQL server.
 
 Configuring Redis Server
 
-With the PostgreSQL database and user created, the next step is to configure your Redis server that will be used as cache management for NetBox. To do that, you will modify the Redis configuration /etc/redis/redis.conf and verify your changes via redis-cli.
+With the PostgreSQL database and user created, the next step is to configure your Redis server 
+that will be used as cache management for NetBox. 
+To do that, you will modify the Redis configuration /etc/redis/redis.conf 
+and verify your changes via redis-cli.
 
 Open the default Redis configuration /etc/redis/redis.conf using the following nano editor command.
 
@@ -179,7 +187,8 @@ Now run the following systemctl command to restart the redis service and apply t
 ***
 sudo systemctl restart redis
 
-To ensure that everything is working, you can verify Redis via redis-cli. Access your Redis server using the redis-cli command below.
+To ensure that everything is working, you can verify Redis via redis-cli.
+Access your Redis server using the redis-cli command below.
 
 ***
 redis-cli
@@ -204,9 +213,14 @@ If successful, you should get the output PONG from the Redis server.
 
 Installing NetBox IRM.  *****
 
-In the following section, you will download and install NetBox IRM to your system. You will download the NetBox source code via Git, then configure it by modifying the NetBox configuration, adding the database PostgreSQL server and Redis, and then you will also create an administrator user for NetBox.
+In the following section, you will download and install NetBox IRM to your system. 
+You will download the NetBox source code via Git, 
+then configure it by modifying the NetBox configuration, 
+adding the database PostgreSQL server and Redis, 
+and then you will also create an administrator user for NetBox.
 
-First, execute the command below to create a new systemd user netbox that will be used for running NetBox installation.
+First, execute the command below to create a new systemd user netbox 
+that will be used for running NetBox installation.
 
 *** 
 sudo useradd -r -d /opt/netbox -s /usr/sbin/nologin netbox
@@ -219,7 +233,9 @@ sudo chown -R netbox:netbox /opt/netbox. ????(з під рута прийнял�
 
 - - create user download netbox
 
-Next, move your working directory to /opt/netbox and generate the NetBox secret key via the script generate_secret_key.py. Be sure to copy the generated secret key that will be used for your NetBox installation.
+Next, move your working directory to /opt/netbox and generate the NetBox secret key 
+via the script generate_secret_key.py. Be sure to copy the generated secret key that will be used 
+for your NetBox installation.
 
 ***
 cd /opt/netbox/netbox/netbox
@@ -227,7 +243,8 @@ sudo -u netbox python3 ../generate_secret_key.py
 
 - - generate secret
 
-Copy the default configuration configuration_example.py to configuration.py, then open the new file configuration.py using the following nano editor command.
+Copy the default configuration configuration_example.py to configuration.py,
+then open the new file configuration.py using the following nano editor command.
 
 ***
 sudo -u netbox cp configuration_example.py configuration.py
@@ -240,7 +257,6 @@ ALLOWED_HOSTS = ['netbox.hwdomain.io', '192.168.10.15']
 
 Input your PostgreSQL database details to the DATABASE section, including the database name, user, password, host, and port.
 
-Саша Київстар, [02.04.2024 19:25]
 # database configuration
 DATABASE = {
     'NAME': 'netboxdb',               # Database name
@@ -281,7 +297,10 @@ SECRET_KEY = 'ZjYbgz$)j!NnqJcZLR!NB2BCz4(Yyk=o^Xr(1sTIrM)ZyiE%nk'
 
 When you're done, save and exit the file.
 
-Next, execute the /opt/netbox/upgrade.sh script to start your NextBox installation. This will create a new Python virtual environment, install some Python packages and libraries, run database migration to your PostgreSQL server, also generate static files for NextBox.
+Next, execute the /opt/netbox/upgrade.sh script to start your NextBox installation. 
+This will create a new Python virtual environment, 
+install some Python packages and libraries, run database migration to your PostgreSQL server, 
+also generate static files for NextBox.
 
 ***
 sudo -u netbox /opt/netbox/upgrade.sh
@@ -302,7 +321,8 @@ Below is the output when the installation is finished.
 
 - - installation finished
 
-After NetBox is configured, you will create an administrator user for NetBox. To do that, log in to the Python virtual environment that is created using the following command.
+After NetBox is configured, you will create an administrator user for NetBox. 
+To do that, log in to the Python virtual environment that is created using the following command.
 
 ***
 source /opt/netbox/venv/bin/activate
