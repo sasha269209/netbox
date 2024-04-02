@@ -1,4 +1,4 @@
-Саша Київстар, [02.04.2024 19:25]
+
 ### NetBox](Komp_Prog_Linix_PO_NetBox.md)
 
 
@@ -37,14 +37,14 @@ In the following step, you will install those dependencies that NetBox needs, yo
 
 To start, execute the following apt command to update your Debian repository.
 
-***
+*** 01
 sudo apt update
 
 - - update repo.  ок
 
 Then, install package dependencies for your NetBox IRM installation.
 
-***
+*** 02
 sudo apt install 
 - apache2        ок
 - postgresql     ок
