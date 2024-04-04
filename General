@@ -127,12 +127,11 @@ Log in to the PostgreSQL server by executing the command below.
 ***
 sudo -u postgres psql ок
 
-Саша Київстар, [02.04.2024 19:25]
 Run the following queries to create a new user netbox with password p4ssw0rd. 
 Then, create a new database netboxdb with the owner netbox.
 
 ***
-CREATE USER netbox LOGIN CREATEDB PASSWORD 'p4ssw0rd';
+CREATE USER netbox LOGIN CREATEDB PASSWORD '111';
 CREATE DATABASE netboxdb OWNER netbox;
 
 - - -create database user
