@@ -174,12 +174,12 @@ and verify your changes via redis-cli.
 Open the default Redis configuration /etc/redis/redis.conf using the following nano editor command.
 
 ***
-sudo nano /etc/redis/redis.conf
+>>>>   sudo nano /etc/redis/redis.conf
 
 Uncomment the option requirepass and input your password that will be used to secure your Redis server.
 
 ***
-requirepass p4ssw0rdNetBox
+>>>>>    requirepass p4ssw0rdNetBox
 
 When finished, save and exit the file.
 
