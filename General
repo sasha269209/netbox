@@ -111,6 +111,8 @@ Python v3.9, 3.10, and 3.11.
 ***
 python3 --version
 
++ + +    pip3 install --upgrade pip
+
 You should see Python 3.11 is installed on your Debian machine.
 
 - - -check python      ок
